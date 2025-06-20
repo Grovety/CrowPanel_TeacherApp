@@ -1,0 +1,16 @@
+{
+    "idf.portWin": "COM8",
+    "idf.openOcdConfigs": [
+        "board/esp32s3-builtin.cfg"
+    ],
+    "idf.customExtraVars": {
+        "OPENOCD_SCRIPTS": "C:\\Users\\badjo\\.espressif\\tools\\openocd-esp32\\v0.12.0-esp32-20240821/openocd-esp32/share/openocd/scripts",
+        "IDF_CCACHE_ENABLE": "1",
+        "ESP_ROM_ELF_DIR": "C:\\Users\\badjo\\.espressif\\tools\\esp-rom-elfs\\20230320/",
+        "IDF_TARGET": "esp32s3"
+    },
+    "idf.espIdfPathWin": "d:\\v5.3.3\\esp-idf",
+    "idf.toolsPathWin": "C:\\Users\\badjo\\.espressif",
+    "idf.pythonInstallPath": "C:\\Users\\badjo\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+    "idf.flashType": "UART"
+}
