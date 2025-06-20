@@ -10,10 +10,10 @@
 extern "C" {
 #endif
 
-void Pause_func(lv_event_t * e);
-void Reset_func(lv_event_t * e);
-void change_launch(lv_event_t * e);
-void change_timer(lv_event_t * e);
+void Pause_func(lv_event_t *e);
+void Reset_func(lv_event_t *e);
+void change_launch(lv_event_t *e);
+void change_timer(lv_event_t *e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

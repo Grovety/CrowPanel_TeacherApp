@@ -3,164 +3,156 @@
 // LVGL version: 8.3.11
 // Project name: teacher
 
-#include "ui.h"
-#include <stdio.h>
 #include "ble_client.h"
 #include "nvs.h"
+#include "ui.h"
+#include <stdio.h>
 
 extern uint32_t seconds_counter;
 extern int correct_counter;
 extern int incorrect_counter;
-extern lv_timer_t* my_timer;
+extern lv_timer_t *my_timer;
 
-int launch_ind=0;
-int timer_ind=0;
-bool is_timer=false;
+int launch_ind = 0;
+int timer_ind = 0;
+bool is_timer = false;
 int base_time;
 
-bool isPaused=true;
-bool isReset=true;
+bool isPaused = true;
+bool isReset = true;
 
-extern char* get_score_string(int game_time, int game_mode, bool best);
-
+extern char *get_score_string(int game_time, int game_mode, bool best);
 
 void save_int(const char *key, int value) {
-    nvs_handle_t handle;
-    esp_err_t err = nvs_open("storage", NVS_READWRITE, &handle);
-    if (err == ESP_OK) {
-        err = nvs_set_i32(handle, key, value); 
-        nvs_commit(handle);
-        nvs_close(handle);
-    }
+  nvs_handle_t handle;
+  esp_err_t err = nvs_open("storage", NVS_READWRITE, &handle);
+  if (err == ESP_OK) {
+    err = nvs_set_i32(handle, key, value);
+    nvs_commit(handle);
+    nvs_close(handle);
+  }
 }
 
-void Pause_func(lv_event_t * e)
-{
-	if(isPaused == true && isReset==true){
-		lv_label_set_text(ui_LabelPause,"Pause");
-		lv_timer_resume(my_timer);
-		lv_obj_add_state(ui_Dropdown1, LV_STATE_DISABLED);    
-		lv_obj_add_state(ui_Dropdown2, LV_STATE_DISABLED);
-		isPaused=false;
-		isReset=false;
-		ble_send_message("continue");
-	}
-	else if(isPaused==false ){
-		lv_timer_pause(my_timer);
-		lv_label_set_text(ui_LabelPause,"Continue");
-		lv_obj_clear_state(ui_Dropdown1, LV_STATE_DISABLED);  
-		lv_obj_clear_state(ui_Dropdown2, LV_STATE_DISABLED); 
-		lv_obj_clear_flag(ui_ButtonReset, LV_OBJ_FLAG_HIDDEN);
-		isPaused=true;
-		ble_send_message("pause");
-	}
-	else{
-		lv_timer_resume(my_timer);
-		lv_label_set_text(ui_LabelPause,"Pause");
-		lv_obj_add_state(ui_Dropdown1, LV_STATE_DISABLED);  
-		lv_obj_add_state(ui_Dropdown2, LV_STATE_DISABLED);    
-		lv_obj_add_flag(ui_ButtonReset, LV_OBJ_FLAG_HIDDEN);
-		isPaused=false;
-		ble_send_message("continue");
-	}
-	
+void Pause_func(lv_event_t *e) {
+  if (isPaused == true && isReset == true) {
+    lv_label_set_text(ui_LabelPause, "Pause");
+    lv_timer_resume(my_timer);
+    lv_obj_add_state(ui_Dropdown1, LV_STATE_DISABLED);
+    lv_obj_add_state(ui_Dropdown2, LV_STATE_DISABLED);
+    isPaused = false;
+    isReset = false;
+    ble_send_message("continue");
+  } else if (isPaused == false) {
+    lv_timer_pause(my_timer);
+    lv_label_set_text(ui_LabelPause, "Continue");
+    lv_obj_clear_state(ui_Dropdown1, LV_STATE_DISABLED);
+    lv_obj_clear_state(ui_Dropdown2, LV_STATE_DISABLED);
+    lv_obj_clear_flag(ui_ButtonReset, LV_OBJ_FLAG_HIDDEN);
+    isPaused = true;
+    ble_send_message("pause");
+  } else {
+    lv_timer_resume(my_timer);
+    lv_label_set_text(ui_LabelPause, "Pause");
+    lv_obj_add_state(ui_Dropdown1, LV_STATE_DISABLED);
+    lv_obj_add_state(ui_Dropdown2, LV_STATE_DISABLED);
+    lv_obj_add_flag(ui_ButtonReset, LV_OBJ_FLAG_HIDDEN);
+    isPaused = false;
+    ble_send_message("continue");
+  }
 }
 
-void Reset_func(lv_event_t * e)
-{
-    seconds_counter=base_time;
-    uint32_t minutes = seconds_counter / 60;
-    uint32_t seconds = seconds_counter % 60;
+void Reset_func(lv_event_t *e) {
+  seconds_counter = base_time;
+  uint32_t minutes = seconds_counter / 60;
+  uint32_t seconds = seconds_counter % 60;
 
-    char buf[24];
-    snprintf(buf, sizeof(buf), "Time %02lu:%02lu", minutes, seconds);
+  char buf[24];
+  snprintf(buf, sizeof(buf), "Time %02lu:%02lu", minutes, seconds);
 
-    lv_label_set_text(ui_LabelTime, buf);
+  lv_label_set_text(ui_LabelTime, buf);
 
-	correct_counter=0;
+  correct_counter = 0;
 
-	snprintf(buf, sizeof(buf), "Correct %u", correct_counter);
-    lv_label_set_text(ui_LabelCorrect, buf);
+  snprintf(buf, sizeof(buf), "Correct %u", correct_counter);
+  lv_label_set_text(ui_LabelCorrect, buf);
 
-	incorrect_counter=0;
+  incorrect_counter = 0;
 
-	snprintf(buf, sizeof(buf), "Incorrect %u", incorrect_counter);
-    lv_label_set_text(ui_LabelIncorrect, buf);
+  snprintf(buf, sizeof(buf), "Incorrect %u", incorrect_counter);
+  lv_label_set_text(ui_LabelIncorrect, buf);
 
-	lv_obj_add_flag(ui_ButtonReset, LV_OBJ_FLAG_HIDDEN);
-	lv_label_set_text(ui_LabelPause,"Start");
-	isReset=true;
+  lv_obj_add_flag(ui_ButtonReset, LV_OBJ_FLAG_HIDDEN);
+  lv_label_set_text(ui_LabelPause, "Start");
+  isReset = true;
 }
 
-void change_launch(lv_event_t * e)
-{
-	launch_ind = lv_dropdown_get_selected(ui_Dropdown1);
-	launch_ind=launch_ind+1;
-	char buf[24];
-	snprintf(buf, sizeof(buf), "launch %d", launch_ind);
-	ble_send_message(buf);
-	save_int("launch",launch_ind);
-	Reset_func(NULL);
+void change_launch(lv_event_t *e) {
+  launch_ind = lv_dropdown_get_selected(ui_Dropdown1);
+  launch_ind = launch_ind + 1;
+  char buf[24];
+  snprintf(buf, sizeof(buf), "launch %d", launch_ind);
+  ble_send_message(buf);
+  save_int("launch", launch_ind);
+  Reset_func(NULL);
 
-    const char* last_score_str = get_score_string(timer_ind, launch_ind, false);
-    const char* best_score_str = get_score_string(timer_ind, launch_ind, true);
+  const char *last_score_str = get_score_string(timer_ind, launch_ind, false);
+  const char *best_score_str = get_score_string(timer_ind, launch_ind, true);
 
-	char result[64];
-	snprintf(result, sizeof(result), "Last: %s", last_score_str);
-	lv_label_set_text(ui_LabelLast, result);
+  char result[64];
+  snprintf(result, sizeof(result), "Last: %s", last_score_str);
+  lv_label_set_text(ui_LabelLast, result);
 
-	char result2[64];
-	snprintf(result2, sizeof(result2), "Best: %s", best_score_str);
-	lv_label_set_text(ui_LabelBest, result2);
+  char result2[64];
+  snprintf(result2, sizeof(result2), "Best: %s", best_score_str);
+  lv_label_set_text(ui_LabelBest, result2);
 }
 
-void change_timer(lv_event_t * e)
-{
-	timer_ind = lv_dropdown_get_selected(ui_Dropdown2);
-	timer_ind=timer_ind+1;
-	save_int("timer",timer_ind);
-	switch (timer_ind) {
-    case 1:
-        base_time=0;
-		is_timer=false;
-        break;
-    case 2:
-        base_time=180;
-		is_timer=true;
-        break;
-    case 3:
-        base_time=300;
-		is_timer=true;
-        break;
-    case 4:
-        base_time=600;
-		is_timer=true;
-        break;
-	case 5:
-        base_time=10;
-		is_timer=true;
-        break;
-    default:
-        base_time=0;
-		is_timer=true;
-        break;
-	}
-	seconds_counter=base_time;
-    uint32_t minutes = seconds_counter / 60;
-    uint32_t seconds = seconds_counter % 60;
+void change_timer(lv_event_t *e) {
+  timer_ind = lv_dropdown_get_selected(ui_Dropdown2);
+  timer_ind = timer_ind + 1;
+  save_int("timer", timer_ind);
+  switch (timer_ind) {
+  case 1:
+    base_time = 0;
+    is_timer = false;
+    break;
+  case 2:
+    base_time = 180;
+    is_timer = true;
+    break;
+  case 3:
+    base_time = 300;
+    is_timer = true;
+    break;
+  case 4:
+    base_time = 600;
+    is_timer = true;
+    break;
+  case 5:
+    base_time = 10;
+    is_timer = true;
+    break;
+  default:
+    base_time = 0;
+    is_timer = true;
+    break;
+  }
+  seconds_counter = base_time;
+  uint32_t minutes = seconds_counter / 60;
+  uint32_t seconds = seconds_counter % 60;
 
-    char buf[24];
-    snprintf(buf, sizeof(buf), "Time %02lu:%02lu", minutes, seconds);
-	lv_label_set_text(ui_LabelTime, buf);
+  char buf[24];
+  snprintf(buf, sizeof(buf), "Time %02lu:%02lu", minutes, seconds);
+  lv_label_set_text(ui_LabelTime, buf);
 
-    const char* last_score_str = get_score_string(timer_ind, launch_ind, false);
-    const char* best_score_str = get_score_string(timer_ind, launch_ind, true);
+  const char *last_score_str = get_score_string(timer_ind, launch_ind, false);
+  const char *best_score_str = get_score_string(timer_ind, launch_ind, true);
 
-	char result[64];
-	snprintf(result, sizeof(result), "Last: %s", last_score_str);
-	lv_label_set_text(ui_LabelLast, result);
+  char result[64];
+  snprintf(result, sizeof(result), "Last: %s", last_score_str);
+  lv_label_set_text(ui_LabelLast, result);
 
-	char result2[64];
-	snprintf(result2, sizeof(result2), "Best: %s", best_score_str);
-	lv_label_set_text(ui_LabelBest, result2);
+  char result2[64];
+  snprintf(result2, sizeof(result2), "Best: %s", best_score_str);
+  lv_label_set_text(ui_LabelBest, result2);
 }

@@ -10,120 +10,114 @@
 
 // SCREEN: ui_Screen1
 void ui_Screen1_screen_init(void);
-lv_obj_t * ui_Screen1;
-lv_obj_t * ui_LabelCorrect;
-lv_obj_t * ui_LabelIncorrect;
-lv_obj_t * ui_LabelTime;
-void ui_event_ButtonPause(lv_event_t * e);
-lv_obj_t * ui_ButtonPause;
-lv_obj_t * ui_LabelPause;
-void ui_event_ButtonReset(lv_event_t * e);
-lv_obj_t * ui_ButtonReset;
-lv_obj_t * ui_LabelReset;
-lv_obj_t * ui_ImageBLE;
-void ui_event_Dropdown1(lv_event_t * e);
-lv_obj_t * ui_Dropdown1;
-lv_obj_t * ui_Label1;
-lv_obj_t * ui_Label2;
-void ui_event_Dropdown2(lv_event_t * e);
-lv_obj_t * ui_Dropdown2;
-lv_obj_t * ui_LabelLast;
-lv_obj_t * ui_LabelBest;
-lv_obj_t * ui_BasePanel;
-lv_obj_t * ui_Label3;
-lv_obj_t * ui_Label4;
-void ui_event_Button1(lv_event_t * e);
-lv_obj_t * ui_Button1;
-lv_obj_t * ui_Label5;
-lv_obj_t * ui_NHSPanel;
-lv_obj_t * ui_Label6;
-lv_obj_t * ui_Label7;
-void ui_event_Button2(lv_event_t * e);
-lv_obj_t * ui_Button2;
-lv_obj_t * ui_Label8;
-lv_obj_t * ui_Label9;
+lv_obj_t *ui_Screen1;
+lv_obj_t *ui_LabelCorrect;
+lv_obj_t *ui_LabelIncorrect;
+lv_obj_t *ui_LabelTime;
+void ui_event_ButtonPause(lv_event_t *e);
+lv_obj_t *ui_ButtonPause;
+lv_obj_t *ui_LabelPause;
+void ui_event_ButtonReset(lv_event_t *e);
+lv_obj_t *ui_ButtonReset;
+lv_obj_t *ui_LabelReset;
+lv_obj_t *ui_ImageBLE;
+void ui_event_Dropdown1(lv_event_t *e);
+lv_obj_t *ui_Dropdown1;
+lv_obj_t *ui_Label1;
+lv_obj_t *ui_Label2;
+void ui_event_Dropdown2(lv_event_t *e);
+lv_obj_t *ui_Dropdown2;
+lv_obj_t *ui_LabelLast;
+lv_obj_t *ui_LabelBest;
+lv_obj_t *ui_BasePanel;
+lv_obj_t *ui_Label3;
+lv_obj_t *ui_Label4;
+void ui_event_Button1(lv_event_t *e);
+lv_obj_t *ui_Button1;
+lv_obj_t *ui_Label5;
+lv_obj_t *ui_NHSPanel;
+lv_obj_t *ui_Label6;
+lv_obj_t *ui_Label7;
+void ui_event_Button2(lv_event_t *e);
+lv_obj_t *ui_Button2;
+lv_obj_t *ui_Label8;
+lv_obj_t *ui_Label9;
 // CUSTOM VARIABLES
-lv_obj_t * uic_Button1;
+lv_obj_t *uic_Button1;
 
 // EVENTS
-lv_obj_t * ui____initial_actions0;
+lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
-    #error "LV_COLOR_DEPTH should be 16bit to match SquareLine Studio's settings"
+#error "LV_COLOR_DEPTH should be 16bit to match SquareLine Studio's settings"
 #endif
-#if LV_COLOR_16_SWAP !=0
-    #error "LV_COLOR_16_SWAP should be 0 to match SquareLine Studio's settings"
+#if LV_COLOR_16_SWAP != 0
+#error "LV_COLOR_16_SWAP should be 0 to match SquareLine Studio's settings"
 #endif
 
 ///////////////////// ANIMATIONS ////////////////////
 
 ///////////////////// FUNCTIONS ////////////////////
-void ui_event_ButtonPause(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
+void ui_event_ButtonPause(lv_event_t *e) {
+  lv_event_code_t event_code = lv_event_get_code(e);
 
-    if(event_code == LV_EVENT_CLICKED) {
-        Pause_func(e);
-    }
+  if (event_code == LV_EVENT_CLICKED) {
+    Pause_func(e);
+  }
 }
 
-void ui_event_ButtonReset(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
+void ui_event_ButtonReset(lv_event_t *e) {
+  lv_event_code_t event_code = lv_event_get_code(e);
 
-    if(event_code == LV_EVENT_CLICKED) {
-        Reset_func(e);
-    }
+  if (event_code == LV_EVENT_CLICKED) {
+    Reset_func(e);
+  }
 }
 
-void ui_event_Dropdown1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
+void ui_event_Dropdown1(lv_event_t *e) {
+  lv_event_code_t event_code = lv_event_get_code(e);
 
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        change_launch(e);
-    }
+  if (event_code == LV_EVENT_VALUE_CHANGED) {
+    change_launch(e);
+  }
 }
 
-void ui_event_Dropdown2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
+void ui_event_Dropdown2(lv_event_t *e) {
+  lv_event_code_t event_code = lv_event_get_code(e);
 
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
-        change_timer(e);
-    }
+  if (event_code == LV_EVENT_VALUE_CHANGED) {
+    change_timer(e);
+  }
 }
 
-void ui_event_Button1(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
+void ui_event_Button1(lv_event_t *e) {
+  lv_event_code_t event_code = lv_event_get_code(e);
 
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_flag_modify(ui_BasePanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-    }
+  if (event_code == LV_EVENT_CLICKED) {
+    _ui_flag_modify(ui_BasePanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+  }
 }
 
-void ui_event_Button2(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
+void ui_event_Button2(lv_event_t *e) {
+  lv_event_code_t event_code = lv_event_get_code(e);
 
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_flag_modify(ui_NHSPanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-    }
+  if (event_code == LV_EVENT_CLICKED) {
+    _ui_flag_modify(ui_NHSPanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+  }
 }
 
 ///////////////////// SCREENS ////////////////////
 
-void ui_init(void)
-{
-    lv_disp_t * dispp = lv_disp_get_default();
-    lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
-                                               false, LV_FONT_DEFAULT);
-    lv_disp_set_theme(dispp, theme);
-    ui_Screen1_screen_init();
-    ui____initial_actions0 = lv_obj_create(NULL);
-    lv_disp_load_scr(ui_Screen1);
+void ui_init(void) {
+  lv_disp_t *dispp = lv_disp_get_default();
+  lv_theme_t *theme = lv_theme_default_init(
+      dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
+      false, LV_FONT_DEFAULT);
+  lv_disp_set_theme(dispp, theme);
+  ui_Screen1_screen_init();
+  ui____initial_actions0 = lv_obj_create(NULL);
+  lv_disp_load_scr(ui_Screen1);
 }

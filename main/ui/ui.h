@@ -22,52 +22,52 @@ extern "C" {
 #include "lvgl.h"
 #endif
 
-#include "ui_helpers.h"
 #include "ui_events.h"
+#include "ui_helpers.h"
 
 // SCREEN: ui_Screen1
 void ui_Screen1_screen_init(void);
-extern lv_obj_t * ui_Screen1;
-extern lv_obj_t * ui_LabelCorrect;
-extern lv_obj_t * ui_LabelIncorrect;
-extern lv_obj_t * ui_LabelTime;
-void ui_event_ButtonPause(lv_event_t * e);
-extern lv_obj_t * ui_ButtonPause;
-extern lv_obj_t * ui_LabelPause;
-void ui_event_ButtonReset(lv_event_t * e);
-extern lv_obj_t * ui_ButtonReset;
-extern lv_obj_t * ui_LabelReset;
-extern lv_obj_t * ui_ImageBLE;
-void ui_event_Dropdown1(lv_event_t * e);
-extern lv_obj_t * ui_Dropdown1;
-extern lv_obj_t * ui_Label1;
-extern lv_obj_t * ui_Label2;
-void ui_event_Dropdown2(lv_event_t * e);
-extern lv_obj_t * ui_Dropdown2;
-extern lv_obj_t * ui_LabelLast;
-extern lv_obj_t * ui_LabelBest;
-extern lv_obj_t * ui_BasePanel;
-extern lv_obj_t * ui_Label3;
-extern lv_obj_t * ui_Label4;
-void ui_event_Button1(lv_event_t * e);
-extern lv_obj_t * ui_Button1;
-extern lv_obj_t * ui_Label5;
-extern lv_obj_t * ui_NHSPanel;
-extern lv_obj_t * ui_Label6;
-extern lv_obj_t * ui_Label7;
-void ui_event_Button2(lv_event_t * e);
-extern lv_obj_t * ui_Button2;
-extern lv_obj_t * ui_Label8;
-extern lv_obj_t * ui_Label9;
+extern lv_obj_t *ui_Screen1;
+extern lv_obj_t *ui_LabelCorrect;
+extern lv_obj_t *ui_LabelIncorrect;
+extern lv_obj_t *ui_LabelTime;
+void ui_event_ButtonPause(lv_event_t *e);
+extern lv_obj_t *ui_ButtonPause;
+extern lv_obj_t *ui_LabelPause;
+void ui_event_ButtonReset(lv_event_t *e);
+extern lv_obj_t *ui_ButtonReset;
+extern lv_obj_t *ui_LabelReset;
+extern lv_obj_t *ui_ImageBLE;
+void ui_event_Dropdown1(lv_event_t *e);
+extern lv_obj_t *ui_Dropdown1;
+extern lv_obj_t *ui_Label1;
+extern lv_obj_t *ui_Label2;
+void ui_event_Dropdown2(lv_event_t *e);
+extern lv_obj_t *ui_Dropdown2;
+extern lv_obj_t *ui_LabelLast;
+extern lv_obj_t *ui_LabelBest;
+extern lv_obj_t *ui_BasePanel;
+extern lv_obj_t *ui_Label3;
+extern lv_obj_t *ui_Label4;
+void ui_event_Button1(lv_event_t *e);
+extern lv_obj_t *ui_Button1;
+extern lv_obj_t *ui_Label5;
+extern lv_obj_t *ui_NHSPanel;
+extern lv_obj_t *ui_Label6;
+extern lv_obj_t *ui_Label7;
+void ui_event_Button2(lv_event_t *e);
+extern lv_obj_t *ui_Button2;
+extern lv_obj_t *ui_Label8;
+extern lv_obj_t *ui_Label9;
 // CUSTOM VARIABLES
-extern lv_obj_t * uic_Button1;
+extern lv_obj_t *uic_Button1;
 
 // EVENTS
 
-extern lv_obj_t * ui____initial_actions0;
+extern lv_obj_t *ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
-LV_IMG_DECLARE(ui_img_1070636958);    // assets/icons8-bluetooth-50 (1).png
+LV_IMG_DECLARE(ui_img_1070636958); // assets/icons8-bluetooth-50 (1).png
 
 // FONTS
 LV_FONT_DECLARE(ui_font_CO2Font);
