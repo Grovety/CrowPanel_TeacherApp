@@ -41,7 +41,7 @@ A ready-to-use firmware archive is available for quick installation.
 
 #### Steps:
 
-1. Download the prebuilt firmware archive from the [Releases](#) section. *(Add actual link when available)*
+1. Download the prebuilt firmware archive from the [Releases](Releases) section. *(Add actual link when available)*
 2. Unzip the archive to any folder.
 3. Run the installer tool:
    **`FlashTool.exe`**
