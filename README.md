@@ -1,4 +1,4 @@
-# ESP32-S3 Teacher 3+ Control Panel
+# ESP32-S3 Teacher 3+ Control Panel for CrowPanel Advance
 
 ## Project Overview
 
@@ -20,9 +20,9 @@ The application provides a simple, touch-based interface with the following elem
 * Timer mode selector
 * Control buttons:
 
-  * **Reset**
-  * **Pause**
-  * **Continue**
+  * Reset
+  * Pause
+  * Continue
 * “Time Over” panel
 * Last result display (mode-dependent)
 * Best result display (mode-dependent)
@@ -47,7 +47,7 @@ A ready-to-use firmware archive is available for quick installation.
    **`FlashTool.exe`**
 4. Follow on-screen instructions to flash the firmware to your CrowPanel Advance device.
 
-> Compatible with CrowPanel Advance 3.5", 5", and 7" models.
+> Compatible with CrowPanel Advance 5" and 7" models.
 
 ---
 
