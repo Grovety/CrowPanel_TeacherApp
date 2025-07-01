@@ -129,7 +129,7 @@ void save_score(int game_time, int game_mode, int score, int total) {
 }
 
 char *get_score_string(int game_time, int game_mode, bool best) {
-  static char result[32]; // Статическая строка, чтобы вернуть указатель
+  static char result[32];
 
   char key_score[32];
   char key_total[32];
